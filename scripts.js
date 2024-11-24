@@ -1,16 +1,12 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var introScreen = document.getElementById('intro-screen');
-    var mainContent = document.getElementById('main-content');
-    var audio = document.getElementById('background-music');
+document.addEventListener("DOMContentLoaded", function() {
+    var audio = document.getElementById("background-audio");
+    var playPromise = audio.play();
 
-    function startExperience() {
-        introScreen.classList.add('hidden');
-        mainContent.classList.remove('hidden');
-        audio.play().catch(function(err) {
-            console.log('Failed to play audio:', err);
+    if (playPromise !== undefined) {
+        playPromise.then(function() {
+            console.log("Audio is playing.");
+        }).catch(function(error) {
+            console.error("Audio playback failed:", error);
         });
     }
-
-    // Start the experience on click
-    introScreen.addEventListener('click', startExperience);
 });
